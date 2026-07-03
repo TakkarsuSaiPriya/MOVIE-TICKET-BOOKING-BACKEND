@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: movie-ticket-booking
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/movie_booking_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+app:
+  jwt:
+    secret: "ThisIsASecretKeyForMovieTicketBookingApplicationMustBe256BitsLong"
+    expiration-ms: 3600000      # 1 hour - access token
+    refresh-expiration-ms: 86400000 # 24 hours
+
+  seat-lock:
+    hold-duration-minutes: 5
+    cleanup-cron: "0 */1 * * * *"   # every 1 minute
+
+logging:
+  level:
+    root: INFO
+    com.movieticket.booking: DEBUG

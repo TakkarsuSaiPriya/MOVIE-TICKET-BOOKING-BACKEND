@@ -6,9 +6,9 @@ spring:
     name: movie-ticket-booking
 
   datasource:
-    url: jdbc:mysql://localhost:3306/movie_booking_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/movie_booking_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
-    password: root
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -18,17 +18,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
 
 app:
   jwt:
     secret: "ThisIsASecretKeyForMovieTicketBookingApplicationMustBe256BitsLong"
-    expiration-ms: 3600000      # 1 hour - access token
-    refresh-expiration-ms: 86400000 # 24 hours
+    expiration-ms: 3600000
+    refresh-expiration-ms: 86400000
 
   seat-lock:
     hold-duration-minutes: 5
-    cleanup-cron: "0 */1 * * * *"   # every 1 minute
+    cleanup-cron: "0 */1 * * * *"
 
 logging:
   level:
